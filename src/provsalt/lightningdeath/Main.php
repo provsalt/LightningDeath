@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace provsalt\lightningdeath;
 
 use pocketmine\entity\Entity;
@@ -9,6 +11,7 @@ use pocketmine\network\mcpe\protocol\AddActorPacket;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use pocketmine\math\Vector3;
+use pocketmine\Player;
 
 class Main extends PluginBase implements Listener {
     public function onEnable()
@@ -19,7 +22,7 @@ class Main extends PluginBase implements Listener {
     public function onDeath(PlayerDeathEvent $event) {
         $this->Lightning($event->getPlayer());
     }
-    public function Lightning($player) {
+    public function Lightning(Player $player) {
         $light = $player->getLevel();
         $light = new AddActorPacket();
         $light->type = 93;
