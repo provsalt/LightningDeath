@@ -1,0 +1,6 @@
+name: LightningDeath
+api: 3.11.3
+author: provsalt
+version: 1.0.0
+website: saltcraft.xyz
+main: provsalt\lightningdeath\Main
