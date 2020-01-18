@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace provsalt\lightningdeath;
 
 use pocketmine\entity\Entity;
@@ -11,29 +9,44 @@ use pocketmine\network\mcpe\protocol\AddActorPacket;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use pocketmine\math\Vector3;
-use pocketmine\Player;
+use pocketmine\utils\Config;
 
 class Main extends PluginBase implements Listener {
+    public $cfg;
     public function onEnable()
     {
-        Server::getInstance()->getPluginManager()->registerEvents($this, $this);
-        //TODO Add config
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        $this->saveResource("config.yml");
+        $this->cfg = new Config($this->getDataFolder() . "config.yml", Config::YAML);
+        if ($this->cfg->get("version") !== 1){
+            $this->getLogger()->critical("Please regenerate your config file!");
+            $this->getServer()->getPluginManager()->disablePlugin($this);
+        }
     }
     public function onDeath(PlayerDeathEvent $event) {
         $this->Lightning($event->getPlayer());
     }
-    public function Lightning(Player $player) {
-        $light = $player->getLevel();
-        $light = new AddActorPacket();
-        $light->type = 93;
-        $light->entityRuntimeId = Entity::$entityCount++;
-        $light->metadata = array();
-        $light->motion = null;
-        $light->yaw = $player->getYaw();
-        $light->pitch = $player->getPitch();
-        $light->position = new Vector3($player->getX(), $player->getY(), $player->getZ());
-        foreach ($player->getLevel()->getPlayers() as $players) {
-            $players->dataPacket($light);
+    public function Lightning($player) {
+        $inworld = false;
+        foreach ($this->cfg->get("worlds") as $worlds){
+            if ($player->getLevel() === $this->getServer()->getLevelByName($worlds)){
+                $inworld = true;
+                break;
+            }
+        }
+        if($inworld) {
+            $light = $player->getLevel();
+            $light = new AddActorPacket();
+            $light->type = 93;
+            $light->entityRuntimeId = Entity::$entityCount++;
+            $light->metadata = array();
+            $light->motion = null;
+            $light->yaw = $player->getYaw();
+            $light->pitch = $player->getPitch();
+            $light->position = new Vector3($player->getX(), $player->getY(), $player->getZ());
+            foreach ($player->getLevel()->getPlayers() as $players) {
+                $players->dataPacket($light);
+            }
         }
     }
 }
