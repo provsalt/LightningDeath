@@ -44,9 +44,9 @@ class Main extends PluginBase implements Listener {
             $light->yaw = $player->getYaw();
             $light->pitch = $player->getPitch();
             $light->position = new Vector3($player->getX(), $player->getY(), $player->getZ());
-            foreach ($player->getLevel()->getPlayers() as $players) {
-                $players->dataPacket($light);
-            }
+            $this->getServer()->broadcastPacket($player->getLevel()->getPlayers(), $light);
+            // Sends lightning packet
+
         }
     }
 }
