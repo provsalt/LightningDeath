@@ -5,7 +5,7 @@ projects:
   LightningDeath:
     path: ""
     libs:
-    - src: JackMD\UpdateNotifier\UpdateNotifier
+    - src: JackMD/UpdateNotifier/UpdateNotifier
       version: ^1.0.0
   
 ...
