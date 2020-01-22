@@ -10,6 +10,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use pocketmine\math\Vector3;
 use pocketmine\utils\Config;
+use JackMD\UpdateNotifier\UpdateNotifier;
 
 class Main extends PluginBase implements Listener {
     public $cfg;
@@ -22,6 +23,7 @@ class Main extends PluginBase implements Listener {
             $this->getLogger()->critical("Please regenerate your config file!");
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
+        UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
     public function onDeath(PlayerDeathEvent $event) {
         $this->Lightning($event->getPlayer());
