@@ -3,6 +3,6 @@ api: 3.11.3
 authors:
   - provsalt
   - muqsit
-version: 1.0.1
+version: 1.0.2
 website: saltcraft.xyz
 main: provsalt\lightningdeath\Main
