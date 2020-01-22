@@ -4,4 +4,8 @@ branches:
 projects:
   LightningDeath:
     path: ""
+    libs:
+    - src: JackMD/UpdateNotifier/UpdateNotifier
+      version: ^1.0.0
+  
 ...
