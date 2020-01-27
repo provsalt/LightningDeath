@@ -10,7 +10,6 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use pocketmine\math\Vector3;
 use pocketmine\utils\Config;
-use JackMD\UpdateNotifier\UpdateNotifier;
 
 class Main extends PluginBase implements Listener {
     public $cfg;
@@ -23,9 +22,11 @@ class Main extends PluginBase implements Listener {
             $this->getLogger()->critical("Please regenerate your config file!");
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
-        UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
     public function onDeath(PlayerDeathEvent $event) {
+        if ($event->getPlayer()->hasPermission("lightningdeath.bypass")){
+            return true;
+        }
         $this->Lightning($event->getPlayer());
     }
     public function Lightning($player) {
@@ -46,9 +47,9 @@ class Main extends PluginBase implements Listener {
             $light->yaw = $player->getYaw();
             $light->pitch = $player->getPitch();
             $light->position = new Vector3($player->getX(), $player->getY(), $player->getZ());
-            $this->getServer()->broadcastPacket($player->getLevel()->getPlayers(), $light);
-            // Sends lightning packet
-
+            foreach ($player->getLevel()->getPlayers() as $players) {
+                $players->dataPacket($light);
+            }
         }
     }
 }
