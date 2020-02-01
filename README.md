@@ -7,3 +7,6 @@ The idea was requested by ItsBlueey here
 https://forums.pmmp.io/threads/lightning-strike-upon-death.8948/
 ### How to use?
 Drop this plugin into your pocketmine's plugin folder and enjoy
+
+#### Permissions
+``lightningdeath.bypass`` Bypass lightning strike on players who have this permissions death

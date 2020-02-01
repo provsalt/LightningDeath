@@ -26,6 +26,9 @@ class Main extends PluginBase implements Listener {
         UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
     public function onDeath(PlayerDeathEvent $event) {
+        if ($event->getPlayer()->hasPermission("lightningdeath.bypass")){
+            return true;
+        }
         $this->Lightning($event->getPlayer());
     }
     public function Lightning($player) {
@@ -47,8 +50,6 @@ class Main extends PluginBase implements Listener {
             $light->pitch = $player->getPitch();
             $light->position = new Vector3($player->getX(), $player->getY(), $player->getZ());
             $this->getServer()->broadcastPacket($player->getLevel()->getPlayers(), $light);
-            // Sends lightning packet
-
         }
     }
 }
