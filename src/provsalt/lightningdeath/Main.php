@@ -27,7 +27,7 @@ class Main extends PluginBase implements Listener {
     }
     public function onDeath(PlayerDeathEvent $event) {
         if ($event->getPlayer()->hasPermission("lightningdeath.bypass")){
-            return true;
+            return;
         }
         $this->Lightning($event->getPlayer());
     }
