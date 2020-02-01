@@ -8,4 +8,4 @@ website: saltcraft.xyz
 main: provsalt\lightningdeath\Main
 permissions:
   lightningdeath.bypass:
-    default: op
+    default: false
