@@ -1,9 +1,9 @@
 name: LightningDeath
-api: 3.11.4
+api: 3.11.6
 authors:
   - provsalt
   - muqsit
-version: 1.1.1
+version: 1.1.2
 website: saltcraft.xyz
 main: provsalt\lightningdeath\Main
 permissions:
