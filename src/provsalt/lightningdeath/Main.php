@@ -6,8 +6,9 @@ use pocketmine\entity\Entity;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\network\mcpe\protocol\AddActorPacket;
+use pocketmine\network\mcpe\protocol\PlaySoundPacket;
+use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\Server;
 use pocketmine\math\Vector3;
 use pocketmine\utils\Config;
 use JackMD\UpdateNotifier\UpdateNotifier;
@@ -25,13 +26,14 @@ class Main extends PluginBase implements Listener {
         }
         UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
-    public function onDeath(PlayerDeathEvent $event) {
+    public function onDeath(PlayerDeathEvent $event) :bool{
         if ($event->getPlayer()->hasPermission("lightningdeath.bypass")){
-            return;
+            return true;
         }
         $this->Lightning($event->getPlayer());
+        return true;
     }
-    public function Lightning($player) {
+    public function Lightning(Player $player) :void {
         $inworld = false;
         foreach ($this->cfg->get("worlds") as $worlds){
             if ($player->getLevel() === $this->getServer()->getLevelByName($worlds)){
@@ -50,6 +52,14 @@ class Main extends PluginBase implements Listener {
             $light->pitch = $player->getPitch();
             $light->position = new Vector3($player->getX(), $player->getY(), $player->getZ());
             $this->getServer()->broadcastPacket($player->getLevel()->getPlayers(), $light);
+            $sound = new PlaySoundPacket();
+            $sound->x = $player->getX();
+            $sound->y = $player->getY();
+            $sound->z = $player->getZ();
+            $sound->volume = 3;
+            $sound->pitch = 2;
+            $sound->soundName = "AMBIENT.WEATHER.LIGHTNING.IMPACT";
+            $this->getServer()->broadcastPacket($player->getLevel()->getPlayers(), $sound);
         }
     }
 }
