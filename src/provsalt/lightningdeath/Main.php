@@ -24,7 +24,7 @@ class Main extends PluginBase implements Listener {
             $this->getLogger()->critical("Please regenerate your config file!");
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
-        UpdateNotifier::checkUpdate($this, $this->getDescription()->getName(), $this->getDescription()->getVersion());
+        UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
     public function onDeath(PlayerDeathEvent $event) :bool{
         if ($event->getPlayer()->hasPermission("lightningdeath.bypass")){
