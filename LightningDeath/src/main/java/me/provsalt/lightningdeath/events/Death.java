@@ -22,6 +22,9 @@ public class Death implements Listener {
     public void DeathEvent(PlayerDeathEvent event){
         Player player = event.getEntity();
         Config cfg = Main.getConfig();
+        if (player.hasPermission("lightningdeath.bypass")){
+            return;
+        }
         boolean inWorld = false;
         for (String World : cfg.getStringList("worlds")) {
             if (player.getLevel().getName().equals(World)){
