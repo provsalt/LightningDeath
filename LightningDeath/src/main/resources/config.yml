@@ -1,0 +1,8 @@
+# DO NOT CHANGE THIS!
+# Config version v 1
+version: 1
+
+# Worlds which are allowed for lightning to strike when player dies
+# Set to [] for no worlds allowed
+worlds:
+  - world
