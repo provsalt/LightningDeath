@@ -25,7 +25,7 @@ class LightningListener implements Listener {
 
 	public function onDeath(PlayerDeathEvent $event) :bool{
 		if ($event->getPlayer()->hasPermission("lightningdeath.bypass")){
-			return true;
+			return false;
 		}
 		$this->Lightning($event->getPlayer());
 		return true;
