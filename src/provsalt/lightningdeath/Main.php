@@ -2,16 +2,16 @@
 
 namespace provsalt\lightningdeath;
 
+use JackMD\UpdateNotifier\UpdateNotifier;
 use pocketmine\entity\Entity;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDeathEvent;
+use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\protocol\AddActorPacket;
-use pocketmine\network\mcpe\protocol\PlaySoundPacket;
+use pocketmine\network\mcpe\protocol\LevelEventPacket;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\math\Vector3;
 use pocketmine\utils\Config;
-use JackMD\UpdateNotifier\UpdateNotifier;
 
 class Main extends PluginBase implements Listener {
     public $cfg;
@@ -42,9 +42,8 @@ class Main extends PluginBase implements Listener {
             }
         }
         if($inworld) {
-            $light = $player->getLevel();
             $light = new AddActorPacket();
-            $light->type = 93;
+            $light->type = "minecraft:lightning_bolt";
             $light->entityRuntimeId = Entity::$entityCount++;
             $light->metadata = array();
             $light->motion = null;
@@ -52,14 +51,10 @@ class Main extends PluginBase implements Listener {
             $light->pitch = $player->getPitch();
             $light->position = new Vector3($player->getX(), $player->getY(), $player->getZ());
             $this->getServer()->broadcastPacket($player->getLevel()->getPlayers(), $light);
-            $sound = new PlaySoundPacket();
-            $sound->x = $player->getX();
-            $sound->y = $player->getY();
-            $sound->z = $player->getZ();
-            $sound->volume = 3;
-            $sound->pitch = 2;
-            $sound->soundName = "AMBIENT.WEATHER.LIGHTNING.IMPACT";
-            $this->getServer()->broadcastPacket($player->getLevel()->getPlayers(), $sound);
+            $sound = new LevelEventPacket();
+            $sound->evid = 1;
+	        $sound->data = 0;
+	        $this->getServer()->broadcastPacket($player->getLevel()->getPlayers(), $sound);
         }
     }
 }
