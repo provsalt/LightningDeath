@@ -32,7 +32,7 @@ class LightningListener implements Listener {
 	}
 	public function Lightning(Player $player) :void {
 		$inworld = false;
-		foreach ($this->getOwner()->cfg->get("worlds") as $worlds){
+		foreach ($this->getOwner()->getConfig()->get("worlds") as $worlds){
 			if ($player->getLevel() === Server::getInstance()->getLevelByName($worlds)){
 				$inworld = true;
 				break;
