@@ -30,31 +30,24 @@ class LightningListener implements Listener {
 		$this->Lightning($event->getPlayer());
 		return true;
 	}
-	public function Lightning(Player $player) :void {
-		$inworld = false;
-		foreach ($this->getOwner()->getConfig()->get("worlds") as $worlds){
-			if ($player->getLevel() === Server::getInstance()->getLevelByName($worlds)){
-				$inworld = true;
-				break;
-			}
-		}
-		if($inworld) {
+	public function Lightning(Player $player) :void{
+		if(in_array($player->getLevel()->getFolderName(), $this->getOwner()->getConfig()->get("worlds"))){
 			$light = new AddActorPacket();
 			$light->type = "minecraft:lightning_bolt";
 			$light->entityRuntimeId = Entity::$entityCount++;
-			$light->metadata = array();
+			$light->metadata = [];
 			$light->motion = null;
 			$light->yaw = $player->getYaw();
 			$light->pitch = $player->getPitch();
 			$light->position = new Vector3($player->getX(), $player->getY(), $player->getZ());
 			Server::getInstance()->broadcastPacket($player->getLevel()->getPlayers(), $light);
 			$sound = new PlaySoundPacket();
-			$sound->soundName="ambient.weather.thunder";
+			$sound->soundName = "ambient.weather.thunder";
 			$sound->x = $player->getX();
 			$sound->y = $player->getY();
 			$sound->z = $player->getZ();
-			$sound->volume=1;
-			$sound->pitch=1;
+			$sound->volume = 1;
+			$sound->pitch = 1;
 			Server::getInstance()->broadcastPacket($player->getLevel()->getPlayers(), $sound);
 		}
 	}

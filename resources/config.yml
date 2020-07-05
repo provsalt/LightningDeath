@@ -3,5 +3,6 @@
 version: 1
 
 # Worlds which are allowed for lightning to strike when player dies
+# The world names are by folder btw
 worlds:
   - world
