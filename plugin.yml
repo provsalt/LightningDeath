@@ -3,7 +3,7 @@ api: 3.14.0
 authors:
   - provsalt
   - muqsit
-version: 1.2.0
+version: 1.2.1
 website: saltcraft.xyz
 main: provsalt\lightningdeath\Loader
 permissions:
