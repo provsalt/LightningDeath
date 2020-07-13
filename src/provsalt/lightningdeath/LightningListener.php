@@ -44,7 +44,7 @@ class LightningListener implements Listener {
 			$light->position = new Vector3($player->getX(), $player->getY(), $player->getZ());
 			Server::getInstance()->broadcastPacket($player->getLevel()->getPlayers(), $light);
 			$block = $player->getLevel()->getBlock($player->getPosition()->floor()->down());
-			$particle = new DestroyBlockParticle(new Vector3($player->getX(), $player->getY(), $player->getZ()), new Block($block->getId()));
+			$particle = new DestroyBlockParticle(new Vector3($player->getX(), $player->getY(), $player->getZ()), $block);
 			$player->getLevel()->addParticle($particle);
 			$sound = new PlaySoundPacket();
 			$sound->soundName = "ambient.weather.thunder";
