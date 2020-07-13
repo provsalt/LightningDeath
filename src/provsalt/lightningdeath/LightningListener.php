@@ -2,9 +2,11 @@
 
 namespace provsalt\lightningdeath;
 
+use pocketmine\block\Block;
 use pocketmine\entity\Entity;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDeathEvent;
+use pocketmine\level\particle\DestroyBlockParticle;
 use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\protocol\AddActorPacket;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
@@ -41,6 +43,9 @@ class LightningListener implements Listener {
 			$light->pitch = $player->getPitch();
 			$light->position = new Vector3($player->getX(), $player->getY(), $player->getZ());
 			Server::getInstance()->broadcastPacket($player->getLevel()->getPlayers(), $light);
+			$block = $player->getLevel()->getBlock($player->getPosition()->floor()->down());
+			$particle = new DestroyBlockParticle(new Vector3($player->getX(), $player->getY(), $player->getZ()), new Block($block->getId()));
+			$player->getLevel()->addParticle($particle);
 			$sound = new PlaySoundPacket();
 			$sound->soundName = "ambient.weather.thunder";
 			$sound->x = $player->getX();
