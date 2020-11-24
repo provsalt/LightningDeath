@@ -3,7 +3,7 @@ api: 3.14.0
 authors:
   - provsalt
   - muqsit
-version: 1.2.2
+version: 1.2.3
 mcpe-protocol: [390, 407, 408, 419]
 website: saltcraft.xyz
 main: provsalt\lightningdeath\Loader
