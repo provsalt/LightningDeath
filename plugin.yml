@@ -1,9 +1,9 @@
 name: LightningDeath
-api: 3.14.0
+api: 3.15.0
 authors:
   - provsalt
   - muqsit
-version: 1.2.3
+version: 1.2.4
 mcpe-protocol: [407, 408, 419, 422]
 website: saltcraft.xyz
 main: provsalt\lightningdeath\Loader
