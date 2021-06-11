@@ -4,7 +4,7 @@ authors:
   - provsalt
   - muqsit
 version: 1.2.5
-mcpe-protocol: [431, 437]
+mcpe-protocol: [431, 440]
 website: moonlightpe.com
 main: provsalt\lightningdeath\Loader
 permissions:
