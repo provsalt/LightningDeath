@@ -2,7 +2,7 @@
 
 namespace provsalt\lightningdeath;
 
-# use JackMD\UpdateNotifier\UpdateNotifier;
+use JackMD\UpdateNotifier\UpdateNotifier;
 use pocketmine\plugin\PluginBase;
 
 class Loader extends PluginBase {
@@ -13,6 +13,6 @@ class Loader extends PluginBase {
             $this->getLogger()->critical("Please regenerate your config file!");
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
-        # UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
+        UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
 }
