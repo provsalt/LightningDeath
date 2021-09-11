@@ -2,8 +2,8 @@
 
 namespace provsalt\lightningdeath;
 
-use JackMD\UpdateNotifier\UpdateNotifier;
 use pocketmine\plugin\PluginBase;
+use JackMD\UpdateNotifier\UpdateNotifier;
 
 class Loader extends PluginBase {
 

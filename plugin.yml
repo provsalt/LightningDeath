@@ -5,8 +5,8 @@ authors:
   - muqsit
 version: 1.3.0
 mcpe-protocol: [440, 448]
-src-namespace-prefix: provsalt\lightningdeath
 main: provsalt\lightningdeath\Loader
+
 permissions:
  lightningdeath.bypass:
     default: false

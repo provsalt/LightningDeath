@@ -2,8 +2,6 @@
 
 namespace provsalt\lightningdeath;
 
-use pocketmine\block\Block;
-use pocketmine\entity\Entity;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\world\particle\BlockBreakParticle;
@@ -15,27 +13,25 @@ use pocketmine\Server;
 
 class LightningListener implements Listener {
 
-	/**
-	 * @var Loader
-	 */
+	/** @var Loader */
 	private $owner;
 
 	public function __construct(Loader $owner){
 		$this->owner = $owner;
 	}
 
-
 	public function onDeath(PlayerDeathEvent $event) :bool{
-		if ($event->getPlayer()->hasPermission("lightningdeath.bypass")){
+		if ($event->getPlayer()->hasPermission("lightningdeath.bypass")) {
 			return false;
 		}
-		$this->Lightning($event->getPlayer());
+		$this->summonLightning($event->getPlayer());
 		return true;
 	}
-	public function Lightning(Player $player) :void{
-		if(in_array($player->getWorld()->getFolderName(), $this->getOwner()->getConfig()->get("worlds"))){
-                        $pos = $player->getPosition();
-                        $light = new AddActorPacket();
+
+	public function summonLightning(Player $player) :void{
+		if (in_array($player->getWorld()->getFolderName(), $this->getOwner()->getConfig()->get("worlds"))) {
+			$pos = $player->getPosition();
+            $light = new AddActorPacket();
 			$light->type = "minecraft:lightning_bolt";
 			$light->entityRuntimeId = 1;
 			$light->metadata = [];
@@ -48,8 +44,8 @@ class LightningListener implements Listener {
 			$player->getWorld()->addParticle($pos->asVector3(), $particle, $player->getWorld()->getPlayers());
 			$sound = new PlaySoundPacket();
 			$sound->soundName = "ambient.weather.thunder";
-                        $sound->x = $pos->getX();
-                        $sound->y = $pos->getY();
+            $sound->x = $pos->getX();
+            $sound->y = $pos->getY();
 			$sound->z = $pos->getZ();
 			$sound->volume = 1;
 			$sound->pitch = 1;
