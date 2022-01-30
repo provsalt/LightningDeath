@@ -37,7 +37,7 @@ class LightningListener implements Listener {
                         $pos = $player->getPosition();
                         $light = new AddActorPacket();
 			$light->type = "minecraft:lightning_bolt";
-			$light->entityRuntimeId = 1;
+			$light->actorRuntimeId = 1;
 			$light->metadata = [];
 			$light->motion = null;
 			$light->yaw = $player->getLocation()->getYaw();
