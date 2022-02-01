@@ -34,26 +34,13 @@ class LightningListener implements Listener {
 	}
 	public function Lightning(Player $player) :void{
 		if(in_array($player->getWorld()->getFolderName(), $this->getOwner()->getConfig()->get("worlds"))){
-                        $pos = $player->getPosition();
-                        $light = new AddActorPacket();
-			$light->type = "minecraft:lightning_bolt";
-			$light->actorRuntimeId = 1;
-			$light->metadata = [];
-			$light->motion = null;
-			$light->yaw = $player->getLocation()->getYaw();
-			$light->pitch = $player->getLocation()->getPitch();
-			$light->position = new Vector3($pos->getX(), $pos->getY(), $pos->getZ());
+			$pos = $player->getPosition();
+			$light2 = AddActorPacket::create(Entity::nextRuntimeId(), 1, "minecraft:lightning_bolt", $player->getPosition()->asVector3(), null, $player->getLocation()->getYaw(), $player->getLocation()->getPitch(), 0.0, [], [], []);
 			$block = $player->getWorld()->getBlock($player->getPosition()->floor()->down());
 			$particle = new BlockBreakParticle($block);
-			$player->getWorld()->addParticle($pos->asVector3(), $particle, $player->getWorld()->getPlayers());
-			$sound = new PlaySoundPacket();
-			$sound->soundName = "ambient.weather.thunder";
-                        $sound->x = $pos->getX();
-                        $sound->y = $pos->getY();
-			$sound->z = $pos->getZ();
-			$sound->volume = 1;
-			$sound->pitch = 1;
-			Server::getInstance()->broadcastPackets($player->getWorld()->getPlayers(), [$light, $sound]);
+			$player->getWorld()->addParticle($pos, $particle, $player->getWorld()->getPlayers());
+			$sound2 = PlaySoundPacket::create("ambient.weather.thunder", $pos->getX(), $pos->getY(), $pos->getZ(), 1, 1);
+			Server::getInstance()->broadcastPackets($player->getWorld()->getPlayers(), [$light2, $sound2]);
 		}
 	}
 
