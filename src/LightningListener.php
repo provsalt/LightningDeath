@@ -35,7 +35,7 @@ class LightningListener implements Listener {
 	public function Lightning(Player $player) :void{
 		if(in_array($player->getWorld()->getFolderName(), $this->getOwner()->getConfig()->get("worlds"))){
 			$pos = $player->getPosition();
-			$light2 = AddActorPacket::create(Entity::nextRuntimeId(), 1, "minecraft:lightning_bolt", $player->getPosition()->asVector3(), null, $player->getLocation()->getYaw(), $player->getLocation()->getPitch(), 0.0, [], [], []);
+			$light2 = AddActorPacket::create(Entity::nextRuntimeId(), 1, "minecraft:lightning_bolt", $player->getPosition()->asVector3(), null, $player->getLocation()->getYaw(), $player->getLocation()->getPitch(), 0.0, 0.0, [], [], []);
 			$block = $player->getWorld()->getBlock($player->getPosition()->floor()->down());
 			$particle = new BlockBreakParticle($block);
 			$player->getWorld()->addParticle($pos, $particle, $player->getWorld()->getPlayers());
