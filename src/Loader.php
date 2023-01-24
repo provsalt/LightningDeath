@@ -12,6 +12,7 @@ use function array_map;
 use function shuffle;
 use function count;
 use function array_unique;
+use function usort;
 
 class Loader extends PluginBase {
     private LightningListener $lightningListener;
@@ -28,11 +29,11 @@ class Loader extends PluginBase {
         [$world, $pos] = $sender instanceof Player ? [
             $sender->getWorld(),
             $sender->getPosition()
-        ] : [$this->getServer()->getDefaultWorld(),
-            $this->getServer()->getDefaultWorld()->getSpawnLocation()
+        ] : [$this->getServer()->getWorldManager()->getDefaultWorld(),
+            $this->getServer()->getWorldManager()->getDefaultWorld()->getSpawnLocation()
         ];
         $nearestPlayers = $world->getPlayers();
-        ushort($nearestPlayes, fn($playerA, $playerB) => $playerA->getPosition()->distance($pos) <=> $playerB->getPosition()->distance($pos));
+        usort($nearestPlayers, fn($playerA, $playerB) => $playerA->getPosition()->distance($pos) <=> $playerB->getPosition()->distance($pos));
 
         $randomPlayers = $this->getServer()->getOnlinePlayers();
         shuffle($randomPlayers);
@@ -54,7 +55,7 @@ class Loader extends PluginBase {
         foreach (array_unique($args) as $arg) {
             if ($arg === "CONSOLE") {
                 // Dear Poggit reviewers: This message is a command output instead of log. Please show some mercy regarding rule B3... Your help is important for such plugin to be "fun".
-                $sender->sendMessage(<<<EOT
+                $sender->sendMessage(<<<'EOT'
                                      .eeeeeeeee
                                     .$$$$$$$$P"
                                    .$$$$$$$$P
