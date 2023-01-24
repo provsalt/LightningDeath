@@ -109,8 +109,8 @@ class Loader extends PluginBase {
         }
 
         $countArgs = count($args) - $countUnknown;
-        $doThat = $countArgs === 1 ? "does that" : "do those";
-        $sender->sendMessage(TextFormat::BOLD . TextFormat::ITALIC . TextFormat::DARK_RED . "Little $doThat " . $countArgs . " know what's gonna happen...");
+        $doThose = $countArgs === 1 ? "does that" : "do those";
+        $sender->sendMessage(TextFormat::BOLD . TextFormat::ITALIC . TextFormat::DARK_RED . "Little $doThose $countArgs know what's gonna happen...");
 
         return true;
     }
