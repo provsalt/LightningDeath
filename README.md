@@ -9,5 +9,5 @@ https://forums.pmmp.io/threads/lightning-strike-upon-death.8948/
 Drop this plugin into your pocketmine's plugin folder and enjoy
 
 #### Permissions
-``lightningdeath.bypass`` Bypass lightning strike on players who have this permissions death
-``lightningdeath.smite`` For command: ``/smite <Target: Player>``
+- ``lightningdeath.bypass`` Bypass lightning strike on players who have this permissions death
+- ``lightningdeath.smite`` For command: ``/smite <Target: Player>``
