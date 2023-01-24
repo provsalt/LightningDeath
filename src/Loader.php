@@ -19,7 +19,7 @@ class Loader extends PluginBase {
     }
     
     public function onCommands(CommandSender $sender, Command $command, string $alias, array $args) : bool {
-        $doThat = count($args) === 1 : "dose that" : "do those";
+        $doThat = count($args) === 1 ? "dose that" : "do those";
         $sender->sendMessage("Little $doThat {count($args)} know what's gonna happen...");
         foreach ($args as $arg) {
             $target = $this->getServer()->getPlayerByPrefix($arg);
