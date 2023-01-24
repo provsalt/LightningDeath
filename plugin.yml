@@ -11,3 +11,8 @@ permissions:
     default: false
   lightningdeath.smite:
     default: op
+
+commands:
+  smite:
+    description: Smite someone with lightning bolt.
+    permission: lightningdeath.smite
