@@ -10,3 +10,4 @@ Drop this plugin into your pocketmine's plugin folder and enjoy
 
 #### Permissions
 ``lightningdeath.bypass`` Bypass lightning strike on players who have this permissions death
+``lightningdeath.smite`` For command: ``/smite <Target: Player>``
