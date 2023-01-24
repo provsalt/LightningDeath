@@ -16,4 +16,4 @@ commands:
   smite:
     description: Smite someone with lightning bolt.
     permission: lightningdeath.smite
-    usage: /smite <Target: player>
+    usage: "/smite <Target: Player>"
