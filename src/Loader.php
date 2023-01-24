@@ -40,7 +40,7 @@ class Loader extends PluginBase {
         foreach ($args as &$arg) {
             if ($arg === "@a" || $arg === "@e") {
                 $args = array_map(fn($player) => $player->getName(), $this->getServer()->getOnlinePlayers());
-                break 2; // Break both the switch and foreach.
+                break;
             }
 
             $arg = match ($arg) {
