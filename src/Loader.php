@@ -53,7 +53,7 @@ class Loader extends PluginBase {
         }
 
         $args = array_unique($args);
-        $unknownArg = 0;
+        $countUnknown = 0;
         foreach ($args as $arg) {
             if ($arg === "CONSOLE") {
                 // Dear Poggit reviewers: This message is a command output instead of log. Please show some mercy regarding rule B3... Your help is important for such plugin to be "fun".
@@ -99,12 +99,12 @@ class Loader extends PluginBase {
             $target = $this->getServer()->getPlayerByPrefix($arg);
             if ($target === null) {
                $sender->sendMessage("$arg who?"); 
-               $unknownArg++;
+               $countUnknown++;
             }
             else $this->lightningListener->Lightning($target);
         }
 
-        $countArgs = count($args) - $unknownArgs;
+        $countArgs = count($args) - $countUnknown;
         $doThat = $countArgs === 1 ? "does that" : "do those";
         $sender->sendMessage(TextFormat::BOLD . TextFormat::ITALIC . TextFormat::DARK_RED . "Little $doThat " . $countArgs . " know what's gonna happen...");
 
