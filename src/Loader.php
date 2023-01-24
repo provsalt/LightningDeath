@@ -94,7 +94,11 @@ class Loader extends PluginBase {
                     /"      www.asciiart.eu/nature/lightning
                     EOT);
                 continue;
-            } elseif ($arg === "") continue; // If @p or @r candidates run out.
+            } elseif ($arg === "") {
+                // If @p or @r candidates run out.
+                $countUnknown++;
+                continue;
+            }
 
             $target = $this->getServer()->getPlayerByPrefix($arg);
             if ($target === null) {
