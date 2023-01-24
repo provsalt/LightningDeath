@@ -49,7 +49,7 @@ class Loader extends PluginBase {
                 "@r" => array_shift($randomPlayers)?->getName(),
                 "@s" => $sender->getName(),
                 default => $arg,
-            };
+            } ?? "";
         }
 
         $args = array_unique($args);
@@ -93,7 +93,7 @@ class Loader extends PluginBase {
                     /"      www.asciiart.eu/nature/lightning
                     EOT);
                 continue;
-            } elseif ($arg === null) continue; // If @p or @r candidates run out.
+            } elseif ($arg === "") continue; // If @p or @r candidates run out.
 
             $target = $this->getServer()->getPlayerByPrefix($arg);
             if ($target === null) $sender->sendMessage("$arg who?");
