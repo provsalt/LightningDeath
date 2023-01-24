@@ -6,6 +6,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\TextFormat;
 
 class Loader extends PluginBase {
     private LightningListener $lightningListener;
@@ -20,7 +21,7 @@ class Loader extends PluginBase {
     
     public function onCommand(CommandSender $sender, Command $command, string $alias, array $args) : bool {
         $doThat = count($args) === 1 ? "dose that" : "do those";
-        $sender->sendMessage("Little $doThat " . count($args) . " know what's gonna happen...");
+        $sender->sendMessage(TextFormat::BOLD . TextFormat::ITALIC . TextFormat::DARK_RED . "Little $doThat " . count($args) . " know what's gonna happen...");
         foreach ($args as $arg) {
             $target = $this->getServer()->getPlayerByPrefix($arg);
             if ($target === null) $sender->sendMessage("$arg who?");
