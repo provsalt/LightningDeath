@@ -6,6 +6,7 @@ use pocketmine\block\Block;
 use pocketmine\entity\Entity;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDeathEvent;
+use pocketmine\network\mcpe\NetworkBroadcastUtils;
 use pocketmine\network\mcpe\protocol\types\entity\PropertySyncData;
 use pocketmine\world\particle\BlockBreakParticle;
 use pocketmine\math\Vector3;
@@ -49,7 +50,8 @@ class LightningListener implements Listener {
 
 			$player->getWorld()->addParticle($pos, $particle, $player->getWorld()->getPlayers());
 			$sound2 = PlaySoundPacket::create("ambient.weather.thunder", $pos->getX(), $pos->getY(), $pos->getZ(), 1, 1);
-			Server::getInstance()->broadcastPackets($player->getWorld()->getPlayers(), [$light2, $sound2]);
+
+            NetworkBroadcastUtils::broadcastPackets($player->getWorld()->getPlayers(), [$light2, $sound2]);
 		}
 	}
 
